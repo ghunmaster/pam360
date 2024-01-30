@@ -1,0 +1,58 @@
+version: '3.8'
+services:
+  pam360:
+    image: ghunmaster/pam360:v1
+#    build: .
+#    expose:
+#      - 80
+    ports:
+      - '8282:8282'
+      - '8283:8283'
+    volumes:
+      - ./conf/:/opt/ManageEngine/PAM360/conf/
+#      - ./licenses/:/opt/ManageEngine/PAM360/licenses/
+      - ./lib/:/opt/ManageEngine/PAM360/lib/
+      - ./pgsql/:/opt/ManageEngine/PAM360/pgsql/
+      - ./logs/:/opt/ManageEngine/PAM360/logs/
+      - ./crt/:/opt/crt/
+#    environment:
+#      - ENV_VARIABLE=value
+#    networks:
+#      - mynetwork
+#    depends_on:
+#      - db
+    # Ghi chú: Tham số 'depends_on' chỉ định rằng dịch vụ 'web' phụ thuộc vào dịch vụ 'db'.
+
+#    deploy:
+#      mode: replicated
+#      replicas: 2
+#      placement:
+#        constraints: [node.role == worker]
+      # Ghi chú: Tham số 'deploy' định nghĩa cấu hình triển khai dịch vụ.
+      # Trong ví dụ này, sử dụng chế độ triển khai 'replicated' với 2 bản sao
+      # và ràng buộc chỉ triển khai trên các worker node.
+
+#    command: cp /opt/ManageEngine/conf/pam360_key.key /opt/ManageEngine/
+    # Ghi chú: Định nghĩa lệnh cần thực thi khi khởi động container.
+
+#    networks:
+#      mynetwork:
+#        ipv4_address: 172.16.0.2
+        # Ghi chú: Định nghĩa địa chỉ IP tĩnh cho container trong mạng 'mynetwork'.
+
+    restart: always
+    # Ghi chú: Định nghĩa chế độ khởi động lại container khi container bị dừng.
+#    logging:
+#      driver: syslog
+#      options:
+#        syslog-address: "tcp://syslog-server:514"
+#        syslog-format: rfc5424
+      # Ghi chú: Định nghĩa driver ghi log là 'syslog' với các tùy chọn liên quan đến syslog server.
+
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "https://127.0.0.1:8282"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 3
+      # Ghi chú: Định nghĩa kiểm tra sức khỏe của container.
+
